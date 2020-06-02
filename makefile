@@ -8,7 +8,7 @@ node_modules:
 	npm install clang-format prettier css-validator html-validate eslint eslint-config-google
 
 pretty: node_modules
-	find portfolio/src/main -name *.html -o -iname *.css | xargs $(PRETTIER) --write
+	find portfolio/src/main -iname *.html -o -iname *.css | xargs $(PRETTIER) --write
 	find portfolio/src/main -iname *.java | xargs $(CLANG_FORMAT) -i
 	find portfolio/src/main -iname *.js | xargs $(CLANG_FORMAT) -i
 
