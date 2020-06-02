@@ -1,7 +1,7 @@
 a.button {
-  background-color: #008CBA; /* Blue */
+  background-color: #008cba; /* Blue */
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
@@ -13,30 +13,30 @@ a.button {
 }
 
 a.button-blue {
-  background-color: #FFFFFF; 
-  color: #000000; 
-  border: 2px solid #008CBA;
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #008cba;
 }
 
 a.button-blue:hover {
-  background-color: #008CBA;
-  color: #FFFFFF;
+  background-color: #008cba;
+  color: #ffffff;
 }
 
 a.button-black {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #000000;
   border: 2px solid #555555;
 }
 
 a.button-black:hover {
   background-color: #555555;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 a.button-red {
-  background-color: #FFFFFF; 
-  color: #000000; 
+  background-color: #ffffff;
+  color: #000000;
   border: 2px solid #f44336;
 }
 
@@ -46,23 +46,23 @@ a.button-red:hover {
 }
 
 a.button-purple {
-  background-color: #FFFFFF; 
-  color: #000000; 
+  background-color: #ffffff;
+  color: #000000;
   border: 2px solid #800080;
 }
 
 a.button-purple:hover {
   background-color: #800080;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 a.button-yellow {
-  background-color: #FFFFFF; 
-  color: #000000; 
-  border: 2px solid #F3FF00;
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #f3ff00;
 }
 
 a.button-yellow:hover {
-  background-color: #F3FF00;
+  background-color: #f3ff00;
   color: #000000;
 }

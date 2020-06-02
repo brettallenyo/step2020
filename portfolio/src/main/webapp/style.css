@@ -1,19 +1,39 @@
 #body {
   margin: auto;
   width: 100%;
+  text-align: center;
 }
 
 .center {
   display: block;
   margin: auto;
-  width: 100%;
+  width: 90%;
 }
 
 #content {
   margin: auto;
   width: 650px;
+  background-color: #ffffff;
+}
+
+#description {
+  width: 100%;
+  text-align: center;
 }
 
 #greeting-container {
   margin-top: 20px;
+}
+
+html {
+  background: url(/images/mitdome.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+h1{
+    text-align: center;
+}
+
+h3{
+    text-align: center;
 }

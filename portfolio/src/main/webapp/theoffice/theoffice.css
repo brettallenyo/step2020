@@ -1,16 +1,16 @@
-body {
- background-image: url("/../images/prisonmike.png");
- background-color: #cccccc;
-}
-
 #content {
   margin: auto;
   text-align: center;
   width: 650px;
   height: 300px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
+}
+
+html {
+  background: url(/../images/prisonmike.png) no-repeat center center fixed;
+  background-size: cover;
 }
 
 h1 {
-    text-shadow: 2px 2px #800080;
+  text-shadow: 2px 2px #800080;
 }
