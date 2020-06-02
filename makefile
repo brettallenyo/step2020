@@ -9,13 +9,18 @@ node_modules:
 
 pretty: node_modules
 	$(PRETTIER) --write portfolio/src/main/webapp/*.{html,css}
+	$(PRETTIER) --write portfolio/src/main/webapp/*/*.{html,css}
 	find portfolio/src/main/java -iname *.java | xargs $(CLANG_FORMAT) -i
 	find portfolio/src/main/webapp -iname *.js | xargs $(CLANG_FORMAT) -i
+	find portfolio/src/main/webapp/* -iname *.js | xargs $(CLANG_FORMAT) -i
 
 validate: node_modules
 	$(HTML_VALIDATE) portfolio/src/main/webapp/*.html
+	$(HTML_VALIDATE) portfolio/src/main/webapp/*/*.html
 	$(CSS_VALIDATOR) portfolio/src/main/webapp/*.css
+	$(CSS_VALIDATOR) portfolio/src/main/webapp/*/*.css
 	$(ESLINT) portfolio/src/main/webapp/*.js
+	$(ESLINT) portfolio/src/main/webapp/*/*.js
 
 package:
 	mvn package
