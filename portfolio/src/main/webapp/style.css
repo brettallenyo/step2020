@@ -1,7 +1,7 @@
 #body {
   margin: auto;
-  width: 100%;
   text-align: center;
+  width: 100%;
 }
 
 .center {
@@ -11,14 +11,14 @@
 }
 
 #content {
+  background-color: #ffffff;
   margin: auto;
   width: 650px;
-  background-color: #ffffff;
 }
 
 #description {
-  width: 100%;
   text-align: center;
+  width: 100%;
 }
 
 #greeting-container {
@@ -30,10 +30,10 @@ html {
   background-size: cover;
 }
 
-h1{
-    text-align: center;
+h1 {
+  text-align: center;
 }
 
-h3{
-    text-align: center;
+h3 {
+  text-align: center;
 }
