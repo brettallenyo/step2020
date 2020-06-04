@@ -16,7 +16,7 @@
  * Fetches the data from the DataServlet and displays.
  */
 function getDataServlet() {/* exported getDataServlet */
-  fetch('/data').then(response => response.text()).then((quote) => {
+  fetch('/data').then((response) => response.text()).then((quote) => {
     document.getElementById('quote-container').innerText = quote;
   });
 }
