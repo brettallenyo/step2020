@@ -5,8 +5,9 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="/buttons.css" />
+    <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="getDataServlet()">
     <div id="content">
       <h1>Brett Allen's Portfolio</h1>
       <h3>
@@ -32,6 +33,7 @@
           as TripAdvisor on their Flights team where I automated their SQL update system, allowing non-computer
           scientists to be able to update databases by just typing into something as simple as an Excel spreadsheet.
         </p>
+        <div id="quote-container"></div>
       </div>
     </div>
   </body>
