@@ -15,7 +15,7 @@
 /**
  * Fetches the data from the DataServlet and displays.
  */
-function getDataServlet() { /* exported getDataServlet */
+function getDataServlet() {/* exported getDataServlet */
   fetch('/data').then((response) => response.json()).then((messages) => {
     const messagesListElement = document.getElementById('messages-container');
     messagesListElement.innerHTML = '';
