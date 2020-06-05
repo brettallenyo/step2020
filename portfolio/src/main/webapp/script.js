@@ -15,13 +15,12 @@
 /**
  * Fetches the data from the DataServlet and displays.
  */
-function getDataServlet() {/* exported getDataServlet */
+function getDataServlet() { /* exported getDataServlet */
   fetch('/data').then((response) => response.json()).then((messages) => {
     const messagesListElement = document.getElementById('messages-container');
     messagesListElement.innerHTML = '';
-    for(var i = 0; i < messages.length; i++){
-      messagesListElement.appendChild(
-        createListElement(messages[i]));
+    for (let i = 0; i < messages.length; i++) {
+      messagesListElement.appendChild(createListElement(messages[i]));
     }
   });
 }
