@@ -16,7 +16,19 @@
  * Fetches the data from the DataServlet and displays.
  */
 function getDataServlet() {/* exported getDataServlet */
-  fetch('/data').then((response) => response.text()).then((quote) => {
-    document.getElementById('quote-container').innerText = quote;
+  fetch('/data').then((response) => response.json()).then((messages) => {
+    const messagesListElement = document.getElementById('messages-container');
+    messagesListElement.innerHTML = '';
+    for(var i = 0; i < messages.length; i++){
+      messagesListElement.appendChild(
+        createListElement(messages[i]));
+    }
   });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
