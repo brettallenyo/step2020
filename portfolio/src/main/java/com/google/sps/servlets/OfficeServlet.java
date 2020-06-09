@@ -14,8 +14,8 @@
 
 package com.google.sps.servlets;
 
-import com.google.sps.data.OfficeGame;
 import com.google.gson.Gson;
+import com.google.sps.data.OfficeGame;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,14 +33,13 @@ public final class OfficeServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
     // state 0 signifies they submit their answer, state 1 signifies saying whether they won
-    if(state == 0){
+    if (state == 0) {
       game.newChoice();
       String json = "{ \"state\" : " + state + ",  \"quote\" : \"" + game.getCurrent() + "\" } ";
       response.getWriter().println(json);
-    }
-    else {
-      String json = "{ \"state\" : " + state + ", \"correct\" : " + game.getSubmission() +
-      	", \"answer\" : \"" + game.getAnswer() + "\"}";
+    } else {
+      String json = "{ \"state\" : " + state + ", \"correct\" : " + game.getSubmission()
+          + ", \"answer\" : \"" + game.getAnswer() + "\"}";
       response.getWriter().println(json);
       state = 0;
     }

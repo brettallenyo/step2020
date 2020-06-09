@@ -15,15 +15,14 @@
 package com.google.sps.data;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Class representing the Office game, where players are instructed to finish a prompted quote.
  *
  */
 public class OfficeGame {
-
   /** Map of values from prompts to answers */
   private final HashMap<String, String> values = new HashMap<String, String>();
 
@@ -34,20 +33,20 @@ public class OfficeGame {
   private boolean lastSubmission = true;
 
   /** Constructor adds all the quotes to the HashMap */
-  public OfficeGame(){
+  public OfficeGame() {
     values.put("I'm Prison ", "Mike");
-    values.put("Sometimes I\'ll start a sentence and I don\'t even know where it\'s going"+
-        ". ", "I just hope I find it along the way");
+    values.put("Sometimes I\'ll start a sentence and I don\'t even know where it\'s going"
+            + ". ",
+        "I just hope I find it along the way");
     values.put("I want people to afraid of ", "how much they love me");
     values.put("I\'m not superstitious, ", "but I am a little stitious");
     values.put("Bears, beets, ", "Battlestar Galactica");
     values.put("I declare ", "bankruptcy");
     values.put("Did I ", "stutter");
-	values.put("I talk a lot, so I\'ve learned ", "to tune myself out");
+    values.put("I talk a lot, so I\'ve learned ", "to tune myself out");
     values.put("Me think, why waste time say lot word, ", "when few word do trick");
     values.put("Dwight mercy-killed ", "Angela\'s cat");
-    values.put("I got six numbers, one more and it would have been ", 
-        "a complete phone number");
+    values.put("I got six numbers, one more and it would have been ", "a complete phone number");
     values.put("And the worst thing about prison ", "was the dementors");
     values.put("Identity theft is not a joke, Jim! ", "Millions of families suffer every year");
     values.put("Bonfire, James Bond-fire. ", "Michael Scarn");
@@ -57,36 +56,36 @@ public class OfficeGame {
     values.put("Well, well, well, ", "how the turntables");
   }
 
-  public String getCurrent(){
+  public String getCurrent() {
     return current;
   }
 
-  public String getAnswer(){
+  public String getAnswer() {
     return values.get(current);
   }
 
-  /** "Submits" the answer by checking if it is equal to the answer and assigning
-    * that to lastSubmission variable */
-  public void submitAnswer(String guess){
+  /**
+   * "Submits" the answer by checking if it is equal to the answer and assigning
+   * that to lastSubmission variable
+   */
+  public void submitAnswer(String guess) {
     lastSubmission = values.get(current).equals(guess);
   }
 
-  public boolean getSubmission(){
+  public boolean getSubmission() {
     return lastSubmission;
   }
 
   /** Picks a new prompt at random to assign to the current prompt */
-  public void newChoice(){
-    int rand = (int) (Math.random()*values.size());
+  public void newChoice() {
+    int rand = (int) (Math.random() * values.size());
     int index = 0;
-    for (String i: values.keySet()){
-      if(index == rand){
-          current = i;
-          break;
+    for (String i : values.keySet()) {
+      if (index == rand) {
+        current = i;
+        break;
       }
       index++;
     }
   }
-
-
 }
