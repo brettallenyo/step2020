@@ -1,3 +1,22 @@
+button {
+  background-color: #ffffff; /* Purple */
+  border: 2px solid #800080;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: #800080;
+  color: #ffffff;
+}
+
 #content {
   background-color: #ffffff;
   height: 300px;
@@ -17,7 +36,6 @@ h1 {
 
 #navigation {
   background-color: #ffffff;
-  height: 300px;
   margin: auto;
   text-align: center;
   width: 650px;

@@ -43,3 +43,28 @@ function addRandomGreeting() {/* exported addRandomGreeting */
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+/**
+ * Fetches the current state of the game and builds the UI
+ */
+function getOfficeGame() {/* exported getOfficeGame */
+  fetch('/office-game').then((response) => response.json()).then((game) => {
+    const state = game.state;
+    console.log(state);
+    // state 0 signifies submission
+    // state 1 signifies saying whether they got it right
+    if (state == 0) {
+      const paragraph = document.getElementById('quote');
+      paragraph.innerText = game.quote;
+    } else {
+      const correct = game.correct;
+      if (correct) {
+        document.getElementById('result').innerText = 'Correct!';
+      } else {
+        document.getElementById('result').innerText = 'False!';
+        document.getElementById('answer').innerText = 'Correct answer: ' +
+            game.answer;
+      }
+    }
+  });
+}
