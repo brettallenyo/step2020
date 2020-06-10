@@ -1,7 +1,7 @@
 button {
-  background-color: #ffffff; /* Purple */
+  background-color: #fff; /* Purple */
   border: 2px solid #800080;
-  color: #000000;
+  color: #000;
   cursor: pointer;
   display: inline-block;
   font-size: 16px;
@@ -14,11 +14,11 @@ button {
 
 button:hover {
   background-color: #800080;
-  color: #ffffff;
+  color: #fff;
 }
 
 #content {
-  background-color: #ffffff;
+  background-color: #fff;
   height: 300px;
   margin: auto;
   text-align: center;
@@ -35,7 +35,7 @@ h1 {
 }
 
 #navigation {
-  background-color: #ffffff;
+  background-color: #fff;
   margin: auto;
   text-align: center;
   width: 650px;

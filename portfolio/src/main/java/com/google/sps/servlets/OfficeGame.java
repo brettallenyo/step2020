@@ -27,7 +27,7 @@ public class OfficeGame {
   private final HashMap<String, String> values = new HashMap<String, String>();
 
   /** The current prompt to answer */
-  private String current = "I'm Prison ";
+  private String currentPrompt = "I'm Prison ";
 
   /** Is true or false based on whether the user got the last question right */
   private boolean lastSubmission = true;
@@ -56,12 +56,12 @@ public class OfficeGame {
     values.put("Well, well, well, ", "how the turntables");
   }
 
-  public String getCurrent() {
-    return current;
+  public String getCurrentPrompt() {
+    return currentPrompt;
   }
 
   public String getAnswer() {
-    return values.get(current);
+    return values.get(currentPrompt);
   }
 
   /**
@@ -69,10 +69,10 @@ public class OfficeGame {
    * that to lastSubmission variable
    */
   public void submitAnswer(String guess) {
-    lastSubmission = values.get(current).equals(guess);
+    lastSubmission = values.get(currentPrompt).equals(guess);
   }
 
-  public boolean getSubmission() {
+  public boolean getWinStatus() {
     return lastSubmission;
   }
 
@@ -82,7 +82,7 @@ public class OfficeGame {
     int index = 0;
     for (String i : values.keySet()) {
       if (index == rand) {
-        current = i;
+        currentPrompt = i;
         break;
       }
       index++;

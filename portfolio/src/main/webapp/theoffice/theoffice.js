@@ -18,12 +18,10 @@
 function getOfficeGame() {/* exported getOfficeGame */
   fetch('/office-game').then((response) => response.json()).then((game) => {
     const state = game.state;
-    console.log(state);
-    // state 0 signifies submission
-    // state 1 signifies saying whether they got it right
-    if (state == 0) {
-      const paragraph = document.getElementById('quote');
-      paragraph.innerText = game.quote;
+    // state GAME signifies submission
+    // state RESULTS signifies saying whether they got it right
+    if (state == 'GAME') {
+      document.getElementById('quote').innerText = game.quote;
     } else {
       const correct = game.correct;
       if (correct) {

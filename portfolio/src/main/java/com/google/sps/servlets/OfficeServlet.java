@@ -22,35 +22,71 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+enum State {
+  GAME,
+  RESULTS
+}
+
+
 /** Servlet that encapsulates the Office game */
 @WebServlet("/office-game")
 public final class OfficeServlet extends HttpServlet {
+
+  private class GameJSON {
+    State state;
+    String quote;
+    boolean correct;
+    String answer;
+  }
+
   private OfficeGame game = new OfficeGame();
 
-  private int state = 0;
+  private State currentState = State.GAME;
 
+  /**
+   * Get requests are processed here and return the JSON required based on the current state
+   * GAME: return the quote
+   * RESULTS: return whether they got it right as well as the correct answer
+   */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
-    // state 0 signifies they submit their answer, state 1 signifies saying whether they won
-    if (state == 0) {
-      game.newChoice();
-      String json = "{ \"state\" : " + state + ",  \"quote\" : \"" + game.getCurrent() + "\" } ";
-      response.getWriter().println(json);
-    } else {
-      String json = "{ \"state\" : " + state + ", \"correct\" : " + game.getSubmission()
-          + ", \"answer\" : \"" + game.getAnswer() + "\"}";
-      response.getWriter().println(json);
-      state = 0;
+    // state GAME signifies they submit their answer, state RESULTS signifies saying whether they won
+    GameJSON json = new GameJSON();
+    switch(currentState){
+      case GAME:
+        game.newChoice();
+        json.state = currentState;
+        json.quote = game.getCurrentPrompt();
+        response.getWriter().println(getJSON(json));
+        break;
+      case RESULTS:
+        json.state = currentState;
+        json.correct = game.getWinStatus();
+        json.answer = game.getAnswer();
+        response.getWriter().println(getJSON(json));
+        currentState = State.GAME;
+        break;
     }
   }
 
+  /**
+   * Gets user answer and submits it to the game. Transitions to the RESULTS state
+   * Redirects user to results page
+   */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // they submit their answer and the game switches to state 1
+    // they submit their answer and the game switches to State RESULTS
     String playerSubmission = request.getParameter("player-submission");
     game.submitAnswer(playerSubmission);
-    state = 1;
+    currentState = State.RESULTS;
     response.sendRedirect("/theoffice/theofficeresult.html");
   }
+
+  private String getJSON(GameJSON gameDetails) {
+    Gson gson = new Gson();
+    String json = gson.toJson(gameDetails);
+    return json;
+  }
+
 }
