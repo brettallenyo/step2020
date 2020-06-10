@@ -17,6 +17,8 @@ package com.google.sps.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Class representing the Office game, where players are instructed to finish a prompted quote.
@@ -24,37 +26,34 @@ import java.util.List;
  */
 public class OfficeGame {
   /** Map of values from prompts to answers */
-  private final HashMap<String, String> values = new HashMap<String, String>();
+  private final Map<String, String> values = Collections.unmodifiableMap(new HashMap<String, String>(){{
+    put("I'm Prison ", "Mike");
+    put("Sometimes I\'ll start a sentence and I don\'t even know where it\'s going"
+            + ". ",
+        "I just hope I find it along the way");
+    put("I want people to afraid of ", "how much they love me");
+    put("I\'m not superstitious, ", "but I am a little stitious");
+    put("Bears, beets, ", "Battlestar Galactica");
+    put("I declare ", "bankruptcy");
+    put("Did I ", "stutter");
+    put("I talk a lot, so I\'ve learned ", "to tune myself out");
+    put("Me think, why waste time say lot word, ", "when few word do trick");
+    put("Dwight mercy-killed ", "Angela\'s cat");
+    put("I got six numbers, one more and it would have been ", "a complete phone number");
+    put("And the worst thing about prison ", "was the dementors");
+    put("Identity theft is not a joke, Jim! ", "Millions of families suffer every year");
+    put("Bonfire, James Bond-fire. ", "Michael Scarn");
+    put("Today, smoking is going to ", "save lives");
+    put("Ryan started ", "the fire");
+    put("Fool me once, strike one. Fool me twice, ", "strike three");
+    put("Well, well, well, ", "how the turntables");
+  }});
 
   /** The current prompt to answer */
   private String currentPrompt = "I'm Prison ";
 
   /** Is true or false based on whether the user got the last question right */
   private boolean lastSubmission = true;
-
-  /** Constructor adds all the quotes to the HashMap */
-  public OfficeGame() {
-    values.put("I'm Prison ", "Mike");
-    values.put("Sometimes I\'ll start a sentence and I don\'t even know where it\'s going"
-            + ". ",
-        "I just hope I find it along the way");
-    values.put("I want people to afraid of ", "how much they love me");
-    values.put("I\'m not superstitious, ", "but I am a little stitious");
-    values.put("Bears, beets, ", "Battlestar Galactica");
-    values.put("I declare ", "bankruptcy");
-    values.put("Did I ", "stutter");
-    values.put("I talk a lot, so I\'ve learned ", "to tune myself out");
-    values.put("Me think, why waste time say lot word, ", "when few word do trick");
-    values.put("Dwight mercy-killed ", "Angela\'s cat");
-    values.put("I got six numbers, one more and it would have been ", "a complete phone number");
-    values.put("And the worst thing about prison ", "was the dementors");
-    values.put("Identity theft is not a joke, Jim! ", "Millions of families suffer every year");
-    values.put("Bonfire, James Bond-fire. ", "Michael Scarn");
-    values.put("Today, smoking is going to ", "save lives");
-    values.put("Ryan started ", "the fire");
-    values.put("Fool me once, strike one. Fool me twice, ", "strike three");
-    values.put("Well, well, well, ", "how the turntables");
-  }
 
   public String getCurrentPrompt() {
     return currentPrompt;
