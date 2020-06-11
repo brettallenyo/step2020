@@ -13,33 +13,24 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Fetches the current state of the game and builds the UI
  */
-function addRandomGreeting() {/* exported addRandomGreeting */
-  const greetings = [
-    'I\'m Prison Mike!',
-    'Sometimes I\'ll start a sentence and I don\'t even know where it\'s going'+
-        '. I just hope I find it along the way.',
-    'I want people to be afraid of how much they love me.',
-    'I\'m not superstitious, but I am a little stitious.',
-    'Bears, beets, Battlestar Galactica', 'I declare BANKRUPTCY!',
-    'Did I stutter?', 'I talk a lot, so I\'ve learned to tune myself out.',
-    'Me think, why waste time say lot word, when few word do trick.',
-    'Dwight mercy-killed Angela\'s cat.',
-    'I got six numbers, one more and it would have been a complete phone ' +
-        'number.',
-    'And the worst thing about prison was the dementors.',
-    'Identity theft is not a joke, Jim! Millions of families suffer every ' +
-        'year.',
-    'Bonfire, James Bond-fire. Michael Scarn!',
-    'Today, smoking is going to save lives.', 'Ryan started the fire!',
-    'Fool me once, strike one. Fool me twice, strike three.',
-    'Well, well, well, how the turntables...'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+function getOfficeGame() {/* exported getOfficeGame */
+  fetch('/office-game').then((response) => response.json()).then((game) => {
+    const state = game.state;
+    // state GAME signifies submission
+    // state RESULTS signifies saying whether they got it right
+    if (state == 'GAME') {
+      document.getElementById('quote').innerText = game.quote;
+    } else {
+      const correct = game.correct;
+      if (correct) {
+        document.getElementById('result').innerText = 'Correct!';
+      } else {
+        document.getElementById('result').innerText = 'False!';
+        document.getElementById('answer').innerText =
+            'Correct answer: ' + game.answer;
+      }
+    }
+  });
 }
