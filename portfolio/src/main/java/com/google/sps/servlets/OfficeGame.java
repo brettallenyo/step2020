@@ -55,7 +55,7 @@ public class OfficeGame {
   /** Is true or false based on whether the user got the last question right */
   private boolean lastSubmission = true;
 
-  private int score= 0;
+  private int score = 0;
 
   public String getCurrentPrompt() {
     return currentPrompt;
