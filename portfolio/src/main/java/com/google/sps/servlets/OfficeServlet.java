@@ -37,6 +37,7 @@ public final class OfficeServlet extends HttpServlet {
     String quote;
     boolean correct;
     String answer;
+    int score;
   }
 
   private OfficeGame game = new OfficeGame();
@@ -58,12 +59,14 @@ public final class OfficeServlet extends HttpServlet {
         game.newChoice();
         json.state = currentState;
         json.quote = game.getCurrentPrompt();
+        json.score = game.getScore();
         response.getWriter().println(getJSON(json));
         break;
       case RESULTS:
         json.state = currentState;
         json.correct = game.getWinStatus();
         json.answer = game.getAnswer();
+        json.score = game.getScore();
         response.getWriter().println(getJSON(json));
         currentState = State.GAME;
         break;
