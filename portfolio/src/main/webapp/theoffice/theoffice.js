@@ -32,5 +32,6 @@ function getOfficeGame() {/* exported getOfficeGame */
             'Correct answer: ' + game.answer;
       }
     }
+    document.getElementById('score').innerText = 'Score: ' + game.score;
   });
 }

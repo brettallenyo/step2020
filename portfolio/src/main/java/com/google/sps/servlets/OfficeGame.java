@@ -55,6 +55,8 @@ public class OfficeGame {
   /** Is true or false based on whether the user got the last question right */
   private boolean lastSubmission = true;
 
+  private int score= 0;
+
   public String getCurrentPrompt() {
     return currentPrompt;
   }
@@ -69,10 +71,19 @@ public class OfficeGame {
    */
   public void submitAnswer(String guess) {
     lastSubmission = values.get(currentPrompt).equals(guess);
+    if(lastSubmission){
+        score += 1;
+    } else {
+        score = 0;
+    }
   }
 
   public boolean getWinStatus() {
     return lastSubmission;
+  }
+
+  public int getScore() {
+    return score;
   }
 
   /** Picks a new prompt at random to assign to the current prompt */
