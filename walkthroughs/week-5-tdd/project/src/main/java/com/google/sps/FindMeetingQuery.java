@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 public final class FindMeetingQuery {
   /**
@@ -73,12 +73,8 @@ public final class FindMeetingQuery {
   }
 
   private List<TimeRange> sortedRangesInQuestion(Collection<Event> events, Collection<String> attendees) {
-      List<TimeRange> ranges = new ArrayList<TimeRange>();
-      for(Event event : events){
-        if(!Collections.disjoint(event.getAttendees(), attendees)){
-          ranges.add(event.getWhen());
-        }
-      }
+      List<TimeRange> ranges = events.stream().filter(event -> !Collections.disjoint(event.getAttendees(), 
+        attendees)).map(event -> event.getWhen()).collect(Collectors.toList());
       Collections.sort(ranges, TimeRange.ORDER_BY_START);
       return ranges;
   }
