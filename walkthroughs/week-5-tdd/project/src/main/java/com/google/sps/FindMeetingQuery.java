@@ -14,62 +14,65 @@
 
 package com.google.sps;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 
 public final class FindMeetingQuery {
+  /**
+   *  Solves for the possible time ranges available to schedule a meeting
+   *  with the given attendees and current events going on.
+   *
+   *  @param events Collection of events that are going on during that day
+   *  @param request A requested meeting with certain attendees
+   *  
+   *  @return A collection of time ranges possible to schedule
+   */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     List<TimeRange> eventRanges = sortedRangesInQuestion(events, request.getAttendees());
     List<TimeRange> possibleRanges = new ArrayList<TimeRange>();
-    int startingPointer = 0;
-    int endingPointer = 1;
-    System.out.println(eventRanges.size());
-    while(endingPointer < eventRanges.size()) {
-      if(eventRanges.get(startingPointer).contains(eventRanges.get(endingPointer))) {
-        endingPointer++;
+    if (eventRanges.size() >= 1){
+      TimeRange startOfDay = TimeRange.fromStartEnd(TimeRange.START_OF_DAY, eventRanges.get(0).start(), false);
+      if (startOfDay.duration() >= request.getDuration()){
+        possibleRanges.add(startOfDay);
       }
-      else if(eventRanges.get(startingPointer).overlaps(eventRanges.get(endingPointer))) {
+    }
+    int startingPointer = 0;
+    for (int endingPointer = 1; endingPointer < eventRanges.size(); endingPointer++) {
+      if (eventRanges.get(startingPointer).overlaps(eventRanges.get(endingPointer))) {
         startingPointer = endingPointer;
-        endingPointer++;
       }
       else {
         TimeRange between = TimeRange.fromStartEnd(eventRanges.get(startingPointer).end(),
             eventRanges.get(endingPointer).start(), false);
-        if(between.duration() >= request.getDuration()){
+        if (between.duration() >= request.getDuration()){
           possibleRanges.add(between);
         }
         startingPointer++;
-        endingPointer++;
       }
     }
-    if(eventRanges.size() >= 1){
-      TimeRange startOfDay = TimeRange.fromStartEnd(TimeRange.START_OF_DAY, eventRanges.get(0).start(), false);
-      if(startOfDay.duration() >= request.getDuration()){
-        possibleRanges.add(startOfDay);
-      }
+    if (eventRanges.size() >= 1){
       TimeRange latestEnd = eventRanges.get(0);
-      for(TimeRange time : eventRanges){
-        if(time.end() > latestEnd.end()){
+      for (TimeRange time : eventRanges){
+        if (time.end() > latestEnd.end()){
             latestEnd = time;
         }
       }
       TimeRange endOfDay = TimeRange.fromStartEnd(latestEnd.end(), TimeRange.END_OF_DAY, true);
-      if(endOfDay.duration() >= request.getDuration()){
+      if (endOfDay.duration() >= request.getDuration()){
         possibleRanges.add(endOfDay);
       }
     }
-    if(eventRanges.size() == 0 && request.getDuration() < TimeRange.WHOLE_DAY.duration()){
+    if (eventRanges.size() == 0 && request.getDuration() < TimeRange.WHOLE_DAY.duration()){
       TimeRange fullDay = TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY, true);
       possibleRanges.add(fullDay);
     }
-    Collections.sort(possibleRanges, TimeRange.ORDER_BY_START);
     return possibleRanges;
   }
 
-  public List<TimeRange> sortedRangesInQuestion(Collection<Event> events, Collection<String> attendees) {
+  private List<TimeRange> sortedRangesInQuestion(Collection<Event> events, Collection<String> attendees) {
       List<TimeRange> ranges = new ArrayList<TimeRange>();
       for(Event event : events){
         if(!Collections.disjoint(event.getAttendees(), attendees)){
