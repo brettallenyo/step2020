@@ -12,22 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Fetches the data from the DataServlet and displays.
- */
-function getDataServlet() {/* exported getDataServlet */
-  fetch('/data').then((response) => response.json()).then((messages) => {
-    const messagesListElement = document.getElementById('messages-container');
-    messagesListElement.innerHTML = '';
-    for (let i = 0; i < messages.length; i++) {
-      messagesListElement.appendChild(createListElement(messages[i]));
-    }
+/** Creates a map and adds it to the page. */
+var map;
+function initMap() {
+  map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 42.359725, lng: -71.092144}, zoom: 16});
+  const MIT = new google.maps.Marker({
+    position: {lat: 42.359725, lng: -71.092144},
+    map: map,
+    title: 'The Big Dome'
   });
-}
-
-/** Creates an <li> element containing text. */
-function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  return liElement;
 }

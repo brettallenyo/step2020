@@ -25,6 +25,12 @@
   margin-top: 20px;
 }
 
+#map {
+  border: thin solid black;
+  height: 500px;
+  width: 500px;
+}
+
 html {
   background: url(/images/mitdome.jpg) no-repeat center center fixed;
   background-size: cover;
