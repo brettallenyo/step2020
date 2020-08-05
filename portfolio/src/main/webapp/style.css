@@ -16,6 +16,11 @@
   width: 650px;
 }
 
+#caption {
+  text-align: center;
+  width: 100%;
+}
+
 #description {
   text-align: center;
   width: 100%;
