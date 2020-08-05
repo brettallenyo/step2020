@@ -70,10 +70,7 @@ public class OfficeGame {
   public OfficeGame(){
     Query query = new Query("HighScore").addSort("high score", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
-    System.out.println("GOT HERE!!");
     for(Entity entity : results.asIterable()){
-        System.out.println("got inside");
-        System.out.println(entity.getProperty("high score"));
         highScore = (long) entity.getProperty("high score");
         break;
     }
