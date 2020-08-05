@@ -38,22 +38,6 @@ public final class FindMeetingQuery {
       if (startOfDay.duration() >= request.getDuration()){
         possibleRanges.add(startOfDay);
       }
-    }
-    int startingPointer = 0;
-    for (int endingPointer = 1; endingPointer < eventRanges.size(); endingPointer++) {
-      if (eventRanges.get(startingPointer).overlaps(eventRanges.get(endingPointer))) {
-        startingPointer = endingPointer;
-      }
-      else {
-        TimeRange between = TimeRange.fromStartEnd(eventRanges.get(startingPointer).end(),
-            eventRanges.get(endingPointer).start(), false);
-        if (between.duration() >= request.getDuration()){
-          possibleRanges.add(between);
-        }
-        startingPointer++;
-      }
-    }
-    if (eventRanges.size() >= 1){
       TimeRange latestEnd = eventRanges.get(0);
       for (TimeRange time : eventRanges){
         if (time.end() > latestEnd.end()){
@@ -69,6 +53,25 @@ public final class FindMeetingQuery {
       TimeRange fullDay = TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY, true);
       possibleRanges.add(fullDay);
     }
+    int startingPointer = 0;
+    for (int endingPointer = 1; endingPointer < eventRanges.size(); endingPointer++) {
+      if (eventRanges.get(startingPointer).overlaps(eventRanges.get(endingPointer))) {
+        startingPointer = endingPointer;
+      }
+      else {
+        TimeRange between = TimeRange.fromStartEnd(eventRanges.get(startingPointer).end(),
+            eventRanges.get(endingPointer).start(), false);
+        if (between.duration() >= request.getDuration()){
+          possibleRanges.add(between);
+        }
+        startingPointer++;
+      }
+    }
+    if (eventRanges.size() == 0 && request.getDuration() < TimeRange.WHOLE_DAY.duration()){
+      TimeRange fullDay = TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY, true);
+      possibleRanges.add(fullDay);
+    }
+    Collections.sort(possibleRanges, TimeRange.ORDER_BY_START);
     return possibleRanges;
   }
 
