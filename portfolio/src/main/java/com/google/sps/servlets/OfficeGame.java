@@ -62,16 +62,19 @@ public class OfficeGame {
   private boolean lastSubmission = true;
 
   private long score = 0;
+    
+  private long highScore = -1;
 
   private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-  private long highScore = -1;
-
   public OfficeGame(){
-    Query query = new Query("Score").addSort("score", SortDirection.DESCENDING);
+    Query query = new Query("HighScore").addSort("high score", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
+    System.out.println("GOT HERE!!");
     for(Entity entity : results.asIterable()){
-        highScore = (long) entity.getProperty("score");
+        System.out.println("got inside");
+        System.out.println(entity.getProperty("high score"));
+        highScore = (long) entity.getProperty("high score");
         break;
     }
   }
@@ -93,9 +96,14 @@ public class OfficeGame {
     if(lastSubmission){
       score += 1;
       if(score > highScore){
-        Entity scoreEntity = new Entity("Score");
-        scoreEntity.setProperty("score", score);
-        datastore.put(scoreEntity);
+        Query query = new Query("HighScore").addSort("high score", SortDirection.DESCENDING);
+        PreparedQuery results = datastore.prepare(query);
+        for(Entity entity : results.asIterable()){
+          highScore = (long) entity.getProperty("high score");
+          entity.setProperty("high score", score);
+          datastore.put(entity);
+          break;
+        }
         highScore = score;
       }
     } else {
