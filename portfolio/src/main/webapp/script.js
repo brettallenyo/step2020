@@ -20,13 +20,16 @@ function initMap() {
       {center: {lat: 42.357177, lng: -71.092641}, zoom: 15});
   addLandmark(
       map, 42.359725, -71.092144, 'The Big Dome',
-      'This is the famous Big Dome.');
+      'The Big Dome, visible from his room across the river, its magnificence brings Brett joy.');
   addLandmark(
       map, 42.350698, -71.090884, 'Theta Tau',
       'Theta Tau Professional Engineering Fraternity, where Brett lives.');
   addLandmark(
       map, 42.359102, -71.095976, 'Rockwell Cage',
       'Rockwell Cage in the Zesiger Fitness Center, where Brett plays volleyball.');
+  addLandmark(
+      map, 42.363106, -71.087904, 'CAVA',
+      'CAVA, Brett\'s favorite place to eat.');
 }
 
 /** Adds a marker that shows an info window when clicked. */
