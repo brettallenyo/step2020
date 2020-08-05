@@ -5,9 +5,10 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="/buttons.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3oaiqJFYwy7VaT34N7icYTwjAFXu-umY"></script>
     <script src="script.js"></script>
   </head>
-  <body onload="getDataServlet()">
+  <body onload="initMap()">
     <div id="content">
       <h1>Brett Allen's Portfolio</h1>
       <h3>
@@ -15,7 +16,6 @@
           >LinkedIn</a
         >
         <a href="https://github.com/brettallenyo" target="_blank" class="button button-black">GitHub</a>
-        <a href="/infiniterun/gamepage.html" class="button button-yellow">Play Infinite Run!</a>
         <a href="/theoffice/theoffice.html" class="button button-purple">Office Quotes</a>
         <a href="/volleyball/volleyball.html" class="button button-red">Volleyball</a>
       </h3>
@@ -33,8 +33,10 @@
           as TripAdvisor on their Flights team where I automated their SQL update system, allowing non-computer
           scientists to be able to update databases by just typing into something as simple as an Excel spreadsheet.
         </p>
-        <ol id="messages-container"></ol>
       </div>
+      <div id="map"></div>
+      <p id="caption">Some important places in Brett's heart. Click to find out more information.</p>
+      <p>&nbsp;</p>
     </div>
   </body>
 </html>

@@ -12,22 +12,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Fetches the data from the DataServlet and displays.
- */
-function getDataServlet() {/* exported getDataServlet */
-  fetch('/data').then((response) => response.json()).then((messages) => {
-    const messagesListElement = document.getElementById('messages-container');
-    messagesListElement.innerHTML = '';
-    for (let i = 0; i < messages.length; i++) {
-      messagesListElement.appendChild(createListElement(messages[i]));
-    }
-  });
+/** Creates a map and adds it to the page. */
+var map;
+function initMap() {
+  map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 42.357177, lng: -71.092641}, zoom: 15});
+  addLandmark(
+      map, 42.359725, -71.092144, 'The Big Dome',
+      'The Big Dome, visible from his room across the river, its magnificence brings Brett joy.');
+  addLandmark(
+      map, 42.350698, -71.090884, 'Theta Tau',
+      'Theta Tau Professional Engineering Fraternity, where Brett lives.');
+  addLandmark(
+      map, 42.359102, -71.095976, 'Rockwell Cage',
+      'Rockwell Cage in the Zesiger Fitness Center, where Brett plays volleyball.');
+  addLandmark(
+      map, 42.363106, -71.087904, 'CAVA',
+      'CAVA, Brett\'s favorite place to eat.');
 }
 
-/** Creates an <li> element containing text. */
-function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  return liElement;
+/** Adds a marker that shows an info window when clicked. */
+function addLandmark(map, lat, lng, title, description) {
+  const marker = new google.maps.Marker(
+      {position: {lat: lat, lng: lng}, map: map, title: title});
+
+  const infoWindow = new google.maps.InfoWindow({content: description});
+  marker.addListener('click', () => {
+    infoWindow.open(map, marker);
+  });
 }

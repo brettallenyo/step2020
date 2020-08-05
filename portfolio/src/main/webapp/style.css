@@ -16,6 +16,11 @@
   width: 650px;
 }
 
+#caption {
+  text-align: center;
+  width: 100%;
+}
+
 #description {
   text-align: center;
   width: 100%;
@@ -23,6 +28,14 @@
 
 #greeting-container {
   margin-top: 20px;
+}
+
+#map {
+  border: thin solid black;
+  height: 500px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 html {
