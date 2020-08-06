@@ -32,6 +32,8 @@ function getOfficeGame() {/* exported getOfficeGame */
             'Correct answer: ' + game.answer;
       }
     }
+    document.getElementById('highScore').innerText = 'All time High Score: ' +
+        game.highScore;
     document.getElementById('score').innerText = 'Score: ' + game.score;
   });
 }
