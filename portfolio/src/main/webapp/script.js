@@ -12,12 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* eslint no-var: 0 */
+
+/* global google */
+
 google.charts.load('current', {'packages': ['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
 /** Creates a map and adds it to the page. */
 var map;
-function initMap() { /* exported initMap */
+function initMap() {/* exported initMap */
   drawChart();
   map = new google.maps.Map(
       document.getElementById('map'),
