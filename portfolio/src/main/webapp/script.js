@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-google.charts.load('current', { 'packages' :[ 'corechart' ]});
+google.charts.load('current', {'packages': ['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
 /** Creates a map and adds it to the page. */
@@ -24,15 +24,15 @@ function initMap() { /* exported initMap */
       {center: {lat: 42.357177, lng: -71.092641}, zoom: 15});
   addLandmark(
       map, 42.359725, -71.092144, 'The Big Dome',
-      'The Big Dome, visible from his room across the river,' + 
-        ' its magnificence brings Brett joy.');
+      'The Big Dome, visible from his room across the river,' +
+          ' its magnificence brings Brett joy.');
   addLandmark(
       map, 42.350698, -71.090884, 'Theta Tau',
       'Theta Tau Professional Engineering Fraternity, where Brett lives.');
   addLandmark(
       map, 42.359102, -71.095976, 'Rockwell Cage',
-      'Rockwell Cage in the Zesiger Fitness Center,' + 
-        ' where Brett plays volleyball.');
+      'Rockwell Cage in the Zesiger Fitness Center,' +
+          ' where Brett plays volleyball.');
   addLandmark(
       map, 42.363106, -71.087904, 'CAVA',
       'CAVA, Brett\'s favorite place to eat.');
@@ -71,9 +71,9 @@ function drawChart() {
   ]);
 
   const options = {
-    'title' : 'How Brett Spends His Day',
-    'width' : 600,
-    'height' : 700,
+    'title': 'How Brett Spends His Day',
+    'width': 600,
+    'height': 700,
   };
 
   const chart = new google.visualization.PieChart(
