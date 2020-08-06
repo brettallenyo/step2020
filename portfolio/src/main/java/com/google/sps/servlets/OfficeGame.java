@@ -14,6 +14,12 @@
 
 package com.google.sps.data;
 
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +61,20 @@ public class OfficeGame {
   /** Is true or false based on whether the user got the last question right */
   private boolean lastSubmission = true;
 
-  private int score = 0;
+  private long score = 0;
+    
+  private long highScore = -1;
+
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+  public OfficeGame(){
+    Query query = new Query("HighScore").addSort("high score", SortDirection.DESCENDING);
+    PreparedQuery results = datastore.prepare(query);
+    for(Entity entity : results.asIterable()){
+        highScore = (long) entity.getProperty("high score");
+        break;
+    }
+  }
 
   public String getCurrentPrompt() {
     return currentPrompt;
@@ -72,9 +91,20 @@ public class OfficeGame {
   public void submitAnswer(String guess) {
     lastSubmission = values.get(currentPrompt).equals(guess);
     if(lastSubmission){
-        score += 1;
+      score += 1;
+      if(score > highScore){
+        Query query = new Query("HighScore").addSort("high score", SortDirection.DESCENDING);
+        PreparedQuery results = datastore.prepare(query);
+        for(Entity entity : results.asIterable()){
+          highScore = (long) entity.getProperty("high score");
+          entity.setProperty("high score", score);
+          datastore.put(entity);
+          break;
+        }
+        highScore = score;
+      }
     } else {
-        score = 0;
+      score = 0;
     }
   }
 
@@ -82,8 +112,12 @@ public class OfficeGame {
     return lastSubmission;
   }
 
-  public int getScore() {
+  public long getScore() {
     return score;
+  }
+
+  public long getHighScore() {
+    return highScore;
   }
 
   /** Picks a new prompt at random to assign to the current prompt */
